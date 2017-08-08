@@ -16,6 +16,7 @@ static NSString*kVersionName = @"address";
 @property(nonatomic,strong)UITextView*textView;
 @property(nonatomic,strong)UITextField*type;
 @property(nonatomic,strong)UIButton*submitButton;
+@property(nonatomic,strong)UIButton*selectButton;
 
 @end
 
@@ -28,6 +29,7 @@ static NSString*kVersionName = @"address";
     
     [self.submitButton setTitle:@"修 改" forState:UIControlStateNormal];
     self.textView.textAlignment = NSTextAlignmentCenter;
+    [self.selectButton setTitle:@"字段名" forState:UIControlStateNormal];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -75,6 +77,39 @@ static NSString*kVersionName = @"address";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)selectType:(UIButton*)button{
+    
+    NSUserDefaults* _def = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary*obj = [_def objectForKey:@"originDic"];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择需要修改的类型" message:nil
+                                                            preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    for (NSString*name in obj.allKeys) {
+        
+        UIAlertAction *sure = [UIAlertAction actionWithTitle:name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            self.type.text = name;
+            self.textView.text = [obj objectForKey:name];
+        }];
+        [alert addAction:sure];
+    }
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+        
+    }];
+    
+   
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+
+    
+}
+
 - (UIImage *)imageWithColor:(UIColor *)color
 {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -96,11 +131,11 @@ static NSString*kVersionName = @"address";
             make.height.mas_equalTo(45);
             make.width.mas_equalTo(self.view).with.offset(-20);
             make.centerX.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).offset(-30);
+//            make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).offset(-30);
             
         }];
         [_submitButton setBackgroundImage:[self imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateHighlighted];
-        _submitButton.backgroundColor = [UIColor blackColor];
+        _submitButton.backgroundColor = YJ;
         _submitButton.layer.cornerRadius = 5.0;
         _submitButton.layer.masksToBounds = YES;
         [_submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -123,28 +158,53 @@ static NSString*kVersionName = @"address";
         _type.clearButtonMode = UITextFieldViewModeWhileEditing;
         [_type mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerX.mas_equalTo(self.view);
-            make.width.mas_equalTo(self.view.mas_width).with.multipliedBy(0.8);
+//            make.centerX.mas_equalTo(self.view);
+//            make.width.mas_equalTo(self.view.mas_width).with.multipliedBy(0.8);
             make.height.mas_equalTo(50);
             make.top.mas_equalTo(self.mas_topLayoutGuideBottom).with.offset(34);
+            make.left.mas_equalTo(self.view).with.offset(10);
+            make.right.mas_equalTo(self.selectButton.mas_left).with.offset(-10);
+            make.width.mas_equalTo(self.selectButton.mas_width).multipliedBy(4.0);
             
         }];
     }
     
     return _type;
 }
+
+-(UIButton *)selectButton{
+    if (!_selectButton) {
+        _selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.view addSubview:_selectButton];
+        [_selectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.right.mas_equalTo(self.view).with.offset(-10);
+            make.centerY.mas_equalTo(self.type.mas_centerY);
+            make.height.mas_equalTo(self.type.mas_height).multipliedBy(0.5);
+        }];
+        [_selectButton setTitleColor:YJ forState:UIControlStateNormal];
+//        [_selectButton setBackgroundImage:[self imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateHighlighted];
+//        [_selectButton setBackgroundImage:[self imageWithColor:YJ] forState:UIControlStateNormal];
+        [_selectButton addTarget:self action:@selector(selectType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _selectButton;
+}
+
+
 -(UITextView *)textView{
     if (!_textView) {
         _textView = [UITextView new];
         _textView.dataDetectorTypes = UIDataDetectorTypeAll;
         [self.view addSubview:_textView];
         
-        _textView.textAlignment = NSTextAlignmentCenter;
+//        _textView.textAlignment = NSTextAlignmentCenter;
         _textView.editable = YES;
         _textView.selectable = YES;
         _textView.layer.cornerRadius = 5.0f;
         _textView.layer.masksToBounds = YES;
         _textView.layer.borderWidth = 1.0f;
+        _textView.font = [UIFont systemFontOfSize:16.0];
         _textView.layer.borderColor = [UIColor blackColor].CGColor;
         [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -152,6 +212,7 @@ static NSString*kVersionName = @"address";
             make.width.mas_equalTo(self.view.mas_width).with.offset(-20);
             make.bottom.mas_equalTo(self.submitButton.mas_top).with.offset(-40);
             make.top.mas_equalTo(self.type.mas_bottom).with.offset(25);
+            make.height.mas_equalTo(200);
             
         }];
     }
