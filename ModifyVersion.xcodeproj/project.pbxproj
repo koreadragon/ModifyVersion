@@ -720,8 +720,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.epbox.modifyVersion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3ff7ba6-8b82-4287-9756-09241ee03c59";
-				PROVISIONING_PROFILE_SPECIFIER = modifVersion;
+				PROVISIONING_PROFILE = "b4e5f5f1-0649-41e5-9c8a-2a6e149e41a8";
+				PROVISIONING_PROFILE_SPECIFIER = finalModifVersion;
 			};
 			name = Debug;
 		};
@@ -735,8 +735,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.epbox.modifyVersion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3ff7ba6-8b82-4287-9756-09241ee03c59";
-				PROVISIONING_PROFILE_SPECIFIER = modifVersion;
+				PROVISIONING_PROFILE = "b4e5f5f1-0649-41e5-9c8a-2a6e149e41a8";
+				PROVISIONING_PROFILE_SPECIFIER = finalModifVersion;
 			};
 			name = Release;
 		};
@@ -809,6 +809,7 @@
 				3C382AF11F344860003E52C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C382AF21F344860003E52C7 /* Build configuration list for PBXNativeTarget "ModifyVersionTests" */ = {
 			isa = XCConfigurationList;
@@ -817,6 +818,7 @@
 				3C382AF41F344860003E52C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C382AF51F344860003E52C7 /* Build configuration list for PBXNativeTarget "ModifyVersionUITests" */ = {
 			isa = XCConfigurationList;
@@ -825,6 +827,7 @@
 				3C382AF71F344860003E52C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
